@@ -47,6 +47,16 @@ public class ExtFlightDelaysController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
+        
+    	model.creaGrafo();
+    	
+    	//Aggiungo stati al menù a tendina
+    	List<String> states = new ArrayList<>();
+    	for (String s : model.getGrafo().vertexSet()) states.add(s);
+    	//Ordine alfabetico
+    	Collections.sort(states);
+    	cmbBoxStati.getItems().addAll(states);
+    	
 
     }
 
@@ -57,6 +67,14 @@ public class ExtFlightDelaysController {
 
     @FXML
     void doVisualizzaVelivoli(ActionEvent event) {
+    	
+         txtResult.clear();
+    	
+    	String state = cmbBoxStati.getValue();
+    	List<String> result = model.getViciniPesati(state);
+    	
+    	for (String s : result) txtResult.appendText(s);
+
 
     }
     
